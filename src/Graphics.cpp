@@ -10,21 +10,17 @@ void Graphics::simulate()
     this->loadBackgroundImg();
     while (true)
     {
-        // sleep at every iteration to reduce CPU usage
         std::this_thread::sleep_for(std::chrono::milliseconds(1));
 
-        // update graphics
         this->drawTrafficObjects();
     }
 }
 
 void Graphics::loadBackgroundImg()
 {
-    // create window
     _windowName = "Concurrency Traffic Simulation";
     cv::namedWindow(_windowName, cv::WINDOW_NORMAL);
 
-    // load image and create copy to be used for semi-transparent overlay
     cv::Mat background = cv::imread(_bgFilename);
     _images.push_back(background);         // first element is the original background
     _images.push_back(background.clone()); // second element will be the transparent overlay
